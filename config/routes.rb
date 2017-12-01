@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  # #1 call resources method and pass it to a Symbol
+  # call resources method and pass it to a Symbol
+  resources :topics
   resources :posts
 
   # #2 this route allows users to visit /about rather than welcome/about
