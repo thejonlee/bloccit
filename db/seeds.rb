@@ -28,8 +28,18 @@ topics = Topic.all
 end
 posts = Post.all
 
+#Create sponsored posts
+50.times.do
+  SponsoredPost.create!(
+    topic:  topics.sample,
+    title:  RandomData.random_sentence,
+    body:   RandomData.random_paragraph,
+    price:  Random.rand(1..1000)
+  )
+end
+sponsored_posts = SponsoredPost.all
+
 # Create Comments
-# #3
 100.times do
   Comment.create!(
 # #4 - sample returns a random element of the array every time it is called
@@ -41,4 +51,5 @@ end
 puts "Seed finished"
 puts "#{Topic.count} topics created"
 puts "#{Post.count} posts created"
+puts "#{SponsoredPost.count} sponsored posts created"
 puts "#{Comment.count} comments created"
