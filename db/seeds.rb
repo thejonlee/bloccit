@@ -19,9 +19,8 @@ topics = Topic.all
 
 # Create Posts
 50.times do
-# #1 - a bang ! instructs the method to raise an exception if there is a problem w/data
+# a bang ! instructs the method to raise an exception if there is a problem w/data
   Post.create!(
-# #2
     title:  RandomData.random_sentence,
     body:   RandomData.random_paragraph
   )
@@ -29,7 +28,6 @@ end
 posts = Post.all
 
 # Create Comments
-# #3
 100.times do
   Comment.create!(
 # #4 - sample returns a random element of the array every time it is called
