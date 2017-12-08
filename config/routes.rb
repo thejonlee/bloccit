@@ -3,8 +3,11 @@ Rails.application.routes.draw do
     # pass `resources :posts` to the `resources :topics` block, which nests post routes under the topic routes
     resources :posts, except: [:index]
   end
+  
+  # the only hash prevents Rails from creating unnecessary routes
+  resources :users, only: [:new, :create]
 
-  # #2 this route allows users to visit /about rather than welcome/about
+  # this route allows users to visit /about rather than welcome/about
   get 'about' => 'welcome#about'
 
   root 'welcome#index'
