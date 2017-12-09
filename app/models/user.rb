@@ -4,7 +4,7 @@ class User < ApplicationRecord
 
   validates :name, length: { minimum: 1, maximum: 100 }, presence: true
 # first validation ensures a valid password upon creation, second upon password update
- validates :password, presence: true, length: { minimum: 6 }, if: "password_digest.nil?"
+ validates :password, presence: true, length: { minimum: 6 }, if: lambda {password_digest.nil?}
  validates :password, length: { minimum: 6 }, allow_blank: true
 
  validates :email,
