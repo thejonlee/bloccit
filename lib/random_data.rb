@@ -1,6 +1,15 @@
 # #5 - use module bc it is a standalone library with no dependencies or inheritance requirements
 module RandomData
-# #6
+  def self.random_name
+    first_name = random_word.capitalize
+    last_name = random_word.capitalize
+    "#{first_name} #{last_name}"
+  end
+
+  def self.random_email
+    "#{random_word}@#{random_word}.#{random_word}"
+  end
+
   def self.random_paragraph
     sentences = []
     rand(4..6).times do
@@ -10,18 +19,18 @@ module RandomData
     sentences.join(" ")
   end
 
-# #7 - capitalize upcases first character and downcases everything else, then we append a period
   def self.random_sentence
     strings = []
     rand(3..8).times do
       strings << random_word
     end
 
+    # capitalize upcases first character and downcases everything else, then we append a period
     sentence = strings.join(" ")
     sentence.capitalize << "."
   end
 
-# #8 - shuffle! on letters in place instead of returning an array
+# shuffle! on letters in place instead of returning an array
   def self.random_word
     letters = ('a'..'z').to_a
     letters.shuffle!

@@ -1,13 +1,15 @@
 class User < ApplicationRecord
+  has_many :posts, dependent: :destroy
+
   # inline callback
   before_save { self.email = email.downcase if email.present? }
 
   validates :name, length: { minimum: 1, maximum: 100 }, presence: true
 # first validation ensures a valid password upon creation, second upon password update
- validates :password, presence: true, length: { minimum: 6 }, if: lambda {password_digest.nil?}
- validates :password, length: { minimum: 6 }, allow_blank: true
+  validates :password, presence: true, length: { minimum: 6 }, if: lambda {password_digest.nil?}
+  validates :password, length: { minimum: 6 }, allow_blank: true
 
- validates :email,
+  validates :email,
             presence: true,
             uniqueness: { case_sensitive: false },
             length: { minimum: 3, maximum: 254 }

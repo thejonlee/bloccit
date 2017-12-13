@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  # use a filter to call require_sign_in before all controller actions except show
+  before_action :require_sign_in, except: :show
 
   def show
     @post = Post.find(params[:id])
@@ -10,13 +12,11 @@ class PostsController < ApplicationController
   end
 
   def create
-    # #9
-    @post = Post.new
-    @post.title = params[:post][:title]
-    @post.body = params[:post][:body]
     @topic = Topic.find(params[:topic_id])
-    # assign a topic to a post
-    @post.topic = @topic
+
+    @post = @topic.posts.build(post_params)
+    # assign @post.user to prpoerly scope the new post
+    @post.user = current_user
 
     if @post.save
       flash[:notice] = "Post was saved."
@@ -33,8 +33,7 @@ class PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
-    @post.title = params[:post][:title]
-    @post.body = params[:post][:body]
+    @post.assign_attributes(post_params)
 
     if @post.save
       flash[:notice] = "Post was updated."
@@ -51,11 +50,16 @@ class PostsController < ApplicationController
     # #8
     if @post.destroy
       flash[:notice] = "\"#{@post.title}\" was deleted successfully."
-      # when a post is deleted, redirect to topic show view 
+      # when a post is deleted, redirect to topic show view
       redirect_to @post.topic
     else
       flash.now[:alert] = "There was an error deleting the post."
       render :show
     end
+  end
+  
+  private
+  def post_params
+    params.require(:post).permit(:title, :body)
   end
 end
