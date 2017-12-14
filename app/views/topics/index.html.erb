@@ -2,12 +2,12 @@
 
 <div class="row">
   <div class="col-md-8">
-<!-- #7 loop each topic in @topics -->
+    <!-- loop each topic in @topics -->
     <% @topics.each do |topic| %>
       <div class="media">
         <div class="media-body">
           <h4 class="media-heading">
-<!-- #8 create link to show view for each topic -->
+            <!-- create link to show view for each topic -->
             <%= link_to topic.name, topic %>
           </h4>
           <small>
@@ -17,8 +17,10 @@
       </div>
     <% end %>
   </div>
-  <div class="col-md-4">
-<!-- #9 create link to create a new topic -->
-    <%= link_to "New Topic", new_topic_path, class: 'btn btn-success' %>
-  </div>
+  <% if user_is_authorized_for_topics? %>
+    <div class="col-md-4">
+      <!-- create link to create a new topic -->
+      <%= link_to "New Topic", new_topic_path, class: 'btn btn-success' %>
+    </div>
+  <% end %>
 </div>

@@ -3,6 +3,8 @@ class User < ApplicationRecord
 
   # inline callback
   before_save { self.email = email.downcase if email.present? }
+  before_save { self.role ||= :member }
+  # self.role ||= :member is shorthand for self.role = :member if self.role.nil?
 
   validates :name, length: { minimum: 1, maximum: 100 }, presence: true
 # first validation ensures a valid password upon creation, second upon password update
@@ -16,4 +18,7 @@ class User < ApplicationRecord
 
 # Ruby class method, requires BCrypt
   has_secure_password
+
+  enum role: [:member, :admin]
+
 end
