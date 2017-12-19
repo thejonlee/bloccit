@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_many :posts, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   # inline callback
   before_save { self.email = email.downcase if email.present? }
