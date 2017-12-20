@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   # create only posts/:post_id/comments routes
   resources :posts, only: [] do
     resources :comments, only: [:create, :destroy]
+    post '/up-vote' => 'votes#up_vote', as: :up_vote
+    post '/down-vote' => 'votes#down_vote', as: :down_vote
   end
 
   # the only hash prevents Rails from creating unnecessary routes
