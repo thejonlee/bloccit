@@ -42,6 +42,8 @@ gem 'bootstrap-sass'
 
 # Used for encrypting passwords
 gem 'bcrypt'
+# handle sensitive data with environment variables
+gem 'figaro', '1.0'
 
 group :development do
   gem 'listen', '~> 3.0.5'
