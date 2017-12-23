@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   end
 
   # the only hash prevents Rails from creating unnecessary routes
-  resources :users, only: [:new, :create]
+  resources :users, only: [:new, :create, :show]
 
   resources :sessions, only: [:new, :create, :destroy]
 
